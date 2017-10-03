@@ -85,3 +85,47 @@ server.post('/games', function (req, res, next) {
         res.send(201, game)
     })
 })
+
+// Update a game by its id
+server.put('/games/:id', function (req, res, next) {
+
+    // Make sure name is defined
+    if (req.params.name === undefined) {
+        // If there are any errors, pass them to next in the correct format
+        return next(new restify.InvalidArgumentError('name must be supplied'))
+    }
+    if (req.params.price === undefined) {
+        // If there are any errors, pass them to next in the correct format
+        return next(new restify.InvalidArgumentError('price must be supplied'))
+    }
+
+    var newGame = {
+        _id: req.params.id,
+        name: req.params.name,
+        price: req.params.price
+    }
+
+    // Update the game with the persistence engine
+    gamesSave.update(newGame, function (error, game) {
+
+        // If there are any errors, pass them to next in the correct format
+        if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
+
+        // Send a 200 OK response
+        res.send(200, newGame)
+    })
+})
+
+// Delete game with the given id
+server.del('/games', function (req, res, next) {
+
+    // Delete the game with the persistence engine
+    gamesSave.deleteMany({}, function (error, game) {
+
+        // If there are any errors, pass them to next in the correct format
+        if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
+
+        // Send a 200 OK response
+        res.send(200, 'All Games deleted !')
+    })
+})
