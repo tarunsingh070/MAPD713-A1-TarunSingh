@@ -44,7 +44,7 @@ server.get('/games/:id', function (req, res, next) {
     // Find a single game by its id within save
     gamesSave.findOne({ _id: req.params.id }, function (error, game) {
 
-        // If there are any errors, pass them to next in the correct format
+        // If there are any errors, pass them to next in the JSON format
         if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
 
         if (game) {
@@ -62,11 +62,11 @@ server.post('/games', function (req, res, next) {
 
     // Make sure name is defined
     if (req.params.name === undefined) {
-        // If there are any errors, pass them to next in the correct format
+        // If there are any errors, pass them to next in the JSON format
         return next(new restify.InvalidArgumentError('name must be supplied'))
     }
     if (req.params.price === undefined) {
-        // If there are any errors, pass them to next in the correct format
+        // If there are any errors, pass them to next in the JSON format
         return next(new restify.InvalidArgumentError('price must be supplied'))
     }
 
@@ -78,7 +78,7 @@ server.post('/games', function (req, res, next) {
     // Create the game using the persistence engine
     gamesSave.create(newGame, function (error, game) {
 
-        // If there are any errors, pass them to next in the correct format
+        // If there are any errors, pass them to next in the JSON format
         if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
 
         // Send the game if no issues
@@ -91,11 +91,11 @@ server.put('/games/:id', function (req, res, next) {
 
     // Make sure name is defined
     if (req.params.name === undefined) {
-        // If there are any errors, pass them to next in the correct format
+        // If there are any errors, pass them to next in the JSON format
         return next(new restify.InvalidArgumentError('name must be supplied'))
     }
     if (req.params.price === undefined) {
-        // If there are any errors, pass them to next in the correct format
+        // If there are any errors, pass them to next in the JSON format
         return next(new restify.InvalidArgumentError('price must be supplied'))
     }
 
@@ -108,7 +108,7 @@ server.put('/games/:id', function (req, res, next) {
     // Update the game with the persistence engine
     gamesSave.update(newGame, function (error, game) {
 
-        // If there are any errors, pass them to next in the correct format
+        // If there are any errors, pass them to next in the JSON format
         if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
 
         // Send a 200 OK response
@@ -122,7 +122,7 @@ server.del('/games', function (req, res, next) {
     // Delete the game with the persistence engine
     gamesSave.deleteMany({}, function (error, game) {
 
-        // If there are any errors, pass them to next in the correct format
+        // If there are any errors, pass them to next in the JSON format
         if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
 
         // Send a 200 OK response
