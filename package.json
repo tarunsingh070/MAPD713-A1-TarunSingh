@@ -1,0 +1,13 @@
+{
+  "name": "game-api",
+  "version": "1.0.0",
+  "description": "REST API - Games",
+  "dependencies": {
+    "restify": "4.1.1",
+    "save": "2.3.0"
+  },
+  "main": "index.js",
+  "author": "Tarun Singh",
+  "private": true,
+  "license": "ISC"
+}
