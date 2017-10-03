@@ -19,3 +19,10 @@ server.listen(PORT, HOST, function () {
     console.log('http://127.0.0.1:8000/games/:id    method:PUT')
     console.log('http://127.0.0.1:8000/games    method:DELETE')
 })
+
+server
+// Allow the use of POST
+.use(restify.fullResponse())
+
+// Maps req.body to req.params so there is no switching between them
+.use(restify.bodyParser())
