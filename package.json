@@ -1,7 +1,7 @@
 {
-  "name": "game-api",
+  "name": "product-api",
   "version": "1.0.0",
-  "description": "REST API - Games",
+  "description": "REST API - Products",
   "dependencies": {
     "restify": "4.1.1",
     "save": "2.3.0"
